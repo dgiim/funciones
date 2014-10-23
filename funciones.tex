@@ -149,7 +149,7 @@
   \end{theorem}
   
    \begin{proof}
-    \\\
+
      \begin{enumerate}[(a)]
       \item Integrando por partes tenemos:
 	\begin{eqnarray*}
@@ -195,13 +195,59 @@
    \item $f(x+1) = xf(x)$
    \item $f(1) = 1$
    \item $\log \circ f es convexa$
-  \end{enumerate}\\
+  \end{enumerate}
   
    Entonces $f(x) = \Gamma(x)$
    
   \end{theorem}
 
-      
+  \begin{proof}
+   Veremos que $f(x)$ queda unívocamente determinada, ya que $\Gamma$ verifica las hipótesis del teorema.
+   Por a), basta hacerlo para $x\in]0,1[$. Llamamos $\varphi = log \circ f$:
+   
+   \begin{equation}
+    \varphi (x+1) = \varphi(x) + log(x), \forall x\in]0,+\infty[
+    \label{phi}
+   \end{equation}
+   
+   $\varphi(0) = 1$ y $\varphi$ es convexa. Suponemos en lo que sigue $ x\in]0,+\infty[$ y $n\in \mathbb{N}$.
+   Claramente $\varphi(n+1) = log(n!)$. Además, por \ref{phi}:
+   
+   \begin{eqnarray*}
+    \varphi(n+1)-\varphi(n) = log(n)\\
+    \varphi(n+2)-\varphi(n+1) = log(n+1)
+   \end{eqnarray*}
+   
+   y por convexidad:
+   \begin{eqnarray*}
+    \varphi (n+1+x) &=& \varphi(x(n+2) +(1-x)(n+1)) \le x\varphi(n+2) + (1-x)\varphi(n+1) \Leftrightarrow\\
+    &\Leftrightarrow& \varphi (n+1+x) - \varphi(n+1) \le x\big(\varphi(n+2)-\varphi(n+1)\big)\\
+    \\\
+   \end{eqnarray*}
+   
+   Lo que lleva a:
+   
+   $$\log(n) \le \frac{\varphi(n+1+x)-\varphi(n+1)}{x} \le \log(n+1)$$
+   
+   Además, es fácilmente demostrable desde \ref{phi} que:
+   \begin{equation}
+    \varphi(n+1+x) = \varphi(x) + \log\big[x(x+1)\ldots(x+n)\big]
+   \end{equation}
+   
+   Entonces:
+   
+   $$0\le \varphi(x) - log \bigg[\frac{n!n^x}{x(x+1)\ldots (x+n)}\bigg] \le xlog\bigg(1+\frac{1}{n}\bigg)$$
+   
+   Además, tenemos que $\lim_{n\rightarrow \infty} log\bigg(1+\frac{1}{n}\bigg)$ para $x$ fijo, lo que nos lleva a:\\
+   
+   $$\Gamma(x) = \lim_{n\rightarrow \infty} \bigg[\frac{n!n^x}{x(x+1)\ldots (x+n)}\bigg] $$
+   
+   y la existencia de dicho límite está asegurada porque $\varphi$ está definida en $x$
+
+
+
+  \end{proof}
+
 
   
   %% Bibliography
