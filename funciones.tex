@@ -223,9 +223,11 @@
     \varphi (n+1+x) &=& \varphi(x(n+2) +(1-x)(n+1)) \le x\varphi(n+2) + (1-x)\varphi(n+1) \Leftrightarrow\\
     &\Leftrightarrow& \varphi (n+1+x) - \varphi(n+1) \le x\big(\varphi(n+2)-\varphi(n+1)\big)\\
     \\\
+    \varphi(n+1) &=& \varphi(x(n+x)+(1-x)(n+x+1)) \le x\varphi(n+x) + (1-x) \varphi(n+x+1) \Leftrightarrow\\
+    &\Leftrightarrow& x\varphi(n+x+1) - x\varphi(n+x) = x\log(n+x) \le \varphi(n+1+x)-\varphi(n+1)
    \end{eqnarray*}
    
-   Lo que lleva a:
+   Lo que lleva, usando el carácter monótono del $\log$ ($log(n) \le log(n+x) \le log(n+1)$:
    
    $$\log(n) \le \frac{\varphi(n+1+x)-\varphi(n+1)}{x} \le \log(n+1)$$
    
@@ -234,7 +236,7 @@
     \varphi(n+1+x) = \varphi(x) + \log\big[x(x+1)\ldots(x+n)\big]
    \end{equation}
    
-   Entonces:
+   Juntando toda esta información se tiene:
    
    $$0\le \varphi(x) - log \bigg[\frac{n!n^x}{x(x+1)\ldots (x+n)}\bigg] \le xlog\bigg(1+\frac{1}{n}\bigg)$$
    
