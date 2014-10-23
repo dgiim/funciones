@@ -1,0 +1,219 @@
+\documentclass[a4paper, 11pt]{amsart}
+\usepackage{amssymb}
+\usepackage[hidelinks]{hyperref}
+\let\emptyset\varnothing
+\listfiles
+
+%%% Castellano
+\usepackage[spanish,es-noquoting]{babel} 
+\selectlanguage{spanish}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsthm}
+
+%%% Diagramas
+% Conmutative diagrams
+%\usepackage{tkz-graph}
+%\usetikzlibrary{arrows}
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows}
+\tikzset{every loop/.style={min distance=10mm,in=0,out=60,looseness=10}}
+\usepackage{tikz-cd}
+\usetikzlibrary{cd}
+
+%% Multicolumns
+\usepackage{multicol}
+
+%%% Shortcuts
+\newcommand{\C}{\mathcal{C} }
+
+\usepackage{enumerate}
+%\usepackage{enumitem}
+%%% Twopart definition
+\newcommand{\twopartdef}[4]
+{
+	\left\{
+		\begin{array}{ll}
+			#1 & \mbox{si } #2 \\
+			#3 & \mbox{si } #4
+		\end{array}
+	\right.
+}
+
+
+
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{lemma}[theorem]{Lema}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definición}
+\newtheorem{example}[theorem]{Ejemplo}
+\newtheorem{exca}[theorem]{Ejercicio}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+
+
+%%  DIAGRAM MACROS
+\usepackage{xparse}
+\usepackage{etoolbox}
+\newcounter{listtotal}\newcounter{listcntr}%
+\NewDocumentCommand{\argument}{o}{%
+  \setcounter{listtotal}{0}\setcounter{listcntr}{-1}%
+  \renewcommand*{\do}[1]{\stepcounter{listtotal}}%
+  \expandafter\docsvlist\expandafter{\argumentarray}%
+  \IfNoValueTF{#1}
+    {\namesarray}% \names
+    {% \names[<index>]
+     \renewcommand*{\do}[1]{\stepcounter{listcntr}\ifnum\value{listcntr}=#1\relax##1\fi}%
+     \expandafter\docsvlist\expandafter{\argumentarray}}%
+}
+
+%% Product Object
+% 1-9:  A, B, Z, AxB, pa, pb, f, g, fxg
+%%
+\newcommand{\productCD}[1]{
+  \def\argumentarray{#1}
+  \begin{tikzcd}[column sep=tiny, ampersand replacement=\&]
+      \& \argument[2] \arrow[dashed]{d}[description]{\argument[8]} \arrow[bend left]{ddr}{\argument[7]} \arrow[bend right]{ddl}[swap]{\argument[6]} \& \\
+      \& {\argument[3]} \arrow{dl}{\argument[4]} \arrow{dr}[swap]{\argument[5]} \& \\
+    \argument[0] \& \& \argument[1]
+  \end{tikzcd}
+}
+
+%% Coproduct Object
+% 1-9:  A, B, Z, AUB, ia, ib, f, g, (f,g)
+%%
+\newcommand{\coproductCD}[1]{
+  \def\argumentarray{#1}
+  \begin{tikzcd}[column sep=tiny, ampersand replacement=\&]
+      \& \argument[2] \& \\
+      \& {\argument[3]} \arrow[dashed]{u}[description]{\argument[8]} \& \\
+    \argument[0] \arrow[bend left]{uur}{\argument[6]} \arrow{ur}[swap]{\argument[4]}  \& \& \argument[1] \arrow[bend right]{uul}[swap]{\argument[7]} \arrow{ul}{\argument[5]}
+  \end{tikzcd}
+}
+
+\everymath{\displaystyle} 
+
+\begin{document}
+
+\title{Funciones con nombre propio}
+
+%    Remove any unused author tags.
+
+%    author one information
+\author{Ignacio Cordón}
+\address{}
+\curraddr{}
+\email{}
+\thanks{}
+
+% References
+%\subjclass[2000]{Primary }
+%    For articles to be published after 1 January 2010, you may use
+%    the following version:
+%\subjclass[2010]{Primary }
+
+\keywords{}
+
+\date{}
+
+\dedicatory{}
+
+
+\begin{abstract}
+  Definición y propiedades fundamentales de algunas funciones con nombre propio.
+\end{abstract}
+
+\maketitle
+
+  \section{Función gamma}
+  
+  \definition
+  Para $0 < x < \infty$, se define la funcion gamma como: 
+      $$\Gamma(x) = \int_0^{\infty}{t^{x-1}e^{-t}dt}$$
+      
+  Es sabido que esta integral converge para cualquier valor de $x\in]0,+\infty[$, y que por tanto la definición de 
+  $\Gamma$ es correcta.\\
+  
+  \begin{theorem}
+    Se verifica:
+      \begin{enumerate}[(a)]
+	\item $\Gamma(x+1) = \Gamma(x)$
+	\item $\Gamma(n+1) = n!$ para cualquier $n\in \mathbb{N}$
+	\item $\log \circ \Gamma$ es convexa en $]0,+\infty[$
+      \end{enumerate}
+  \end{theorem}
+  
+   \begin{proof}
+    \\\
+     \begin{enumerate}[(a)]
+      \item Integrando por partes tenemos:
+	\begin{eqnarray*}
+	\Gamma(x+1) &=& \int_0^{\infty}{t^{x}e^{-t}dt} = \bigg[-e^{-t}t^x\bigg]_0^{\infty} +
+	  \int_0^{\infty}{xt^xe^{-t}dt} = \\
+	  & = & x\int_0^{\infty}{t^{x-1}e^{-t}dt} = x\Gamma(x)
+	\end{eqnarray*}
+      \item Inducción sobre $n$, usando (a) y $\Gamma(1) = \int_0^{\infty}{e^{-t}dt} = 
+	\bigg[-e^{-t}\bigg]_0^{\infty} = 1 $
+      \item Dados $p,q \in \mathbb{N} : \frac{1}{p} + \frac{1}{q} = 1$\\
+      
+	La \textit{desigualdad de Young} para $a,b \ge 0$ nos dice: 
+	  $$ab \le \frac{a^p}{p} + \frac{b^q}{q}$$\\
+	La \textit{desigualdad de Holder} nos dice: 
+	  $$\bigg|\int_a^b {fg dt}\bigg| \le 
+	  \bigg(\int_a^b {|f|^p dt}\bigg)^{1/p} \bigg(\int_a^b {|g|^p dt}\bigg)^{1/q}$$
+	  
+	Así:
+	
+	\begin{eqnarray*}
+	 \Gamma\bigg(\frac{x}{p} +\frac{y}{q}\bigg) & = & 
+	    \int_0^{\infty}{t^{\big(\frac{x}{p}+\frac{y}{q}
+	    -\frac{1}{p}-\frac{1}{q}\big)}e^{-t}dt} 
+	    =\int_0^{\infty}{t^{\big(\frac{1}{p}(x-1)\big)} t^{\frac{1}{q}(y-1)\big)}e^{-t}dt} =\\
+	    \\
+	 & = &_{(*)} \le \Gamma(x)^{1/p}\Gamma(x)^{1/q}
+	\end{eqnarray*}\\
+	
+	Donde en $(*)$ se ha usado la desigualdad de Holder anteriormente descrita.
+
+     \end{enumerate}
+      
+    \end{proof}
+  
+  De hecho estas tres propiedades caracterizan a la función $\Gamma$, como demostraron Bohr y
+  Mollerup en el teorema al que dan nombre:
+      
+  \begin{theorem}{Caracterización de Bohr-Mollerup}\\
+  
+  Sea $f\ge 0$ sobre $]0,+\infty[$ verificando:
+  
+  \begin{enumerate}[(a)]
+   \item $f(x+1) = xf(x)$
+   \item $f(1) = 1$
+   \item $\log \circ f es convexa$
+  \end{enumerate}\\
+  
+   Entonces $f(x) = \Gamma(x)$
+   
+  \end{theorem}
+
+      
+
+  
+  %% Bibliography
+  \vfill
+  \begin{thebibliography}{9}
+
+  \bibitem{algebra0}
+    Walter Rudin,\\
+    \emph{Chapter 8}.\\
+    Principios de Análisis Matemático
+    
+  \end{thebibliography}
+
+  
+\end{document}
