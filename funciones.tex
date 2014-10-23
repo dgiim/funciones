@@ -198,7 +198,7 @@
   \end{enumerate}
   
    Entonces $f(x) = \Gamma(x)$
-   
+  \label{caracterizacion}
   \end{theorem}
 
   \begin{proof}
@@ -242,14 +242,39 @@
    
    Además, tenemos que $\lim_{n\rightarrow \infty} log\bigg(1+\frac{1}{n}\bigg)$ para $x$ fijo, lo que nos lleva a:\\
    
-   $$\Gamma(x) = \lim_{n\rightarrow \infty} \bigg[\frac{n!n^x}{x(x+1)\ldots (x+n)}\bigg] $$
+   $$\varphi(x) = \Gamma(x) \lim_{n\rightarrow \infty} \bigg[\frac{n!n^x}{x(x+1)\ldots (x+n)}\bigg] $$
    
-   y la existencia de dicho límite está asegurada porque $\varphi$ está definida en $x$
-
-
-
+   y la existencia de dicho límite está asegurada porque $\varphi$ está definida en $]0,1[$, deduciéndose
+   de a) que la igualdad es cierta para todo $x\in]0,+\infty[$
   \end{proof}
 
+  \begin{definition}
+   Se define la función Beta por $B(x,y) = \int_0^1 {t^{x-1}(t-1)^{y-1}dt}$ para todo $x,y>0$
+  \end{definition}
+
+  
+  \begin{theorem}
+   Se verifica que:
+    $$B(x,y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}$$
+   \end{theorem}
+   
+   \begin{proof}
+    Fijado $y>0$ probaremos que $f(x) = \frac{\Gamma(x+y)\cdot B(x,y)}{\Gamma(y)}$ cumple las hipótesis del
+    teorema \ref{caracterizacion}
+    
+    \begin{enumerate}
+     \item Se tiene:
+      \begin{eqnarray}
+       B(1,y) &=& \frac{1}{y}\\
+       B(x+1,y) &=& \int_0^1{t^x (1-t)^{y-1}dt} =\\ 	\nonumber
+		&=& \int_0^1{\bigg(\frac{t}{1-t}\bigg)^x (1-t)^{x+y-1} dt} =\\	\nonumber
+		&=& \bigg[\frac{(1-t)^{x+y}}{x+y}\cdot \bigg(\frac{t}{1-t}\bigg)^x\bigg]_0^1 +
+		 x \int_0^1{ \bigg(\frac{t}{1-t}\bigg)^x \frac{1}{1-t^2}dt}\\		\nonumber       
+      \end{eqnarray}
+
+    \end{enumerate}
+
+   \end{proof}
 
   
   %% Bibliography
