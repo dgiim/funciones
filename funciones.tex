@@ -125,17 +125,21 @@
 
 
 \begin{abstract}
-  Definición y propiedades fundamentales de algunas funciones con nombre propio.
+  Definición y propiedades fundamentales de algunas funciones elementales.
 \end{abstract}
 
 \maketitle
 
   \section{Función gamma}
   
-  \definition
+  \begin{definition}
   Para $0 < x < \infty$, se define la funcion gamma como: 
-      $$\Gamma(x) = \int_0^{\infty}{t^{x-1}e^{-t}dt}$$
-      
+    \begin{equation}
+      \Gamma(x) = \int_0^{\infty}{t^{x-1}e^{-t}dt}
+      \label{gamma}
+    \end{equation}
+  \end{definition}
+  
   Es sabido que esta integral converge para cualquier valor de $x\in]0,+\infty[$, y que por tanto la definición de 
   $\Gamma$ es correcta.\\
   
@@ -248,8 +252,14 @@
    de a) que la igualdad es cierta para todo $x\in]0,+\infty[$
   \end{proof}
 
+  \section{Función Beta}
+  
   \begin{definition}
-   Se define la función Beta por $B(x,y) = \int_0^1 {t^{x-1}(t-1)^{y-1}dt}$ para todo $x,y>0$
+   Se define la función Beta con $x,y>0$ por:
+   \begin{equation}
+       B(x,y) = \int_0^1 {t^{x-1}(t-1)^{y-1}dt}
+       \label{beta}
+   \end{equation}
   \end{definition}
 
   
@@ -262,23 +272,57 @@
     Fijado $y>0$ probaremos que $f(x) = \frac{\Gamma(x+y)\cdot B(x,y)}{\Gamma(y)}$ cumple las hipótesis del
     teorema \ref{caracterizacion}
     
-    \begin{enumerate}
+    \begin{enumerate}[a)]
      \item Se tiene:
       \begin{eqnarray}
-       B(1,y) &=& \frac{1}{y}\\
        B(x+1,y) &=& \int_0^1{t^x (1-t)^{y-1}dt} =\\ 	\nonumber
 		&=& \int_0^1{\bigg(\frac{t}{1-t}\bigg)^x (1-t)^{x+y-1} dt} =\\	\nonumber
-		&=& \bigg[\frac{(1-t)^{x+y}}{x+y}\cdot \bigg(\frac{t}{1-t}\bigg)^x\bigg]_0^1 +
-		 x \int_0^1{ \bigg(\frac{t}{1-t}\bigg)^x \frac{1}{1-t^2}dt}\\		\nonumber       
+		&=& \bigg[\frac{(1-t)^{x+y}}{x+y}\cdot \bigg(\frac{t}{1-t}\bigg)^x\bigg]_0^1 +\\\nonumber
+		&+& \frac{x}{x+y} \int_0^1{ \bigg(\frac{t}{1-t}\bigg)^{x-1} \frac{(1-t)^{x+y}}{(1-t)^2}dt}=\\		\nonumber       
+		&=& \frac{x}{x+y}B(x,y)
       \end{eqnarray}
-
+      Aplicando esto:
+      \begin{eqnarray*}
+      f(x+1) &=& \frac{\Gamma(x+1+y)\cdot B(x+1,y)}{\Gamma(y)} = \\
+	     &=& \frac{(x+y)\Gamma(x+y)xB(x,y)}{(x+y)\Gamma(y)} = xf(x)
+      \end{eqnarray*}
+      
+    \item $f(1) = \frac{\Gamma(1+y)B(1,y)}{\Gamma(y)} = \frac{y\Gamma(y)}{\Gamma(y)}\frac{1}{y} = 1$\\
+    
+      ya que $B(1,y) = y^{-1}$\\
+      
+    \item $log\circ B(x,y)$ es convexa para un $y$ fijo, por la desigualdad de Holder.\\
+      Claramente $\log \circ f$ es convexa por ser $\Gamma$ y $B$ log-convexas (para $y$ fijo).
+      
     \end{enumerate}
-
+    \bigskip
+    Lo que aplicando el Teorema \ref{caracterizacion} nos lleva a concluir $f(x) = \Gamma(x)$
    \end{proof}
+   
+  \subsection{Consecuencias}
+  La sustitución $t=\sen^2(\theta)$ en \ref{beta} da lugar a:
+  \begin{equation}
+   2\int_0^{\pi/2}{(\sen\theta)^{2x-1}(\cos\theta)^{2y-1}d\theta} = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}
+  \end{equation}
+  donde haciendo $x=y=\frac{1}{2}$ se obtiene $\Gamma\bigg(\frac{1}{2}\bigg) = \sqrt{\pi}$\\
+  
+  La sustitución $t=s^2$ convierte a \ref{gamma} en:
+  \begin{equation}
+   \Gamma(x) = 2\int_0^\infty s^{2x-1}e^{-s^2}ds \qquad x>0
+  \end{equation}
+  y haciendo $x=\frac{1}{2}$ se obtiene $\int_{\infty}^{\infty} e^{-s^2}ds = \sqrt{\pi}$\\
+  
+  Finalmente, es fácilmente deducible del Teorema \ref{caracterizacion} que:
+  \begin{equation}
+   \Gamma(x)= \frac{2^{x-1}}{\sqrt{\pi}}\Gamma\bigg(\frac{x}{2}\bigg)\bigg(\frac{x+1}{2}\bigg)
+  \end{equation}
+
+
+  
 
   
   %% Bibliography
-  \vfill
+  \newpage
   \begin{thebibliography}{9}
 
   \bibitem{algebra0}
