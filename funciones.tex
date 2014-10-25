@@ -145,7 +145,7 @@
   
   \begin{theorem}
     Se verifica:
-      \begin{enumerate}[(i)]
+      \begin{enumerate}[i.]
 	\item $\Gamma(x+1) = \Gamma(x)$
 	\item $\Gamma(n+1) = n!$ para cualquier $n\in \mathbb{N}$
 	\item $\log \circ \Gamma$ es convexa en $]0,+\infty[$
@@ -154,23 +154,37 @@
   
    \begin{proof}
 
-     \begin{enumerate}[(a)]
+     \begin{enumerate}[i.]
       \item Integrando por partes tenemos:
 	\begin{eqnarray*}
 	\Gamma(x+1) &=& \int_0^{\infty}{t^{x}e^{-t}dt} = \bigg[-e^{-t}t^x\bigg]_0^{\infty} +
-	  \int_0^{\infty}{xt^xe^{-t}dt} = \\
+	  \int_0^{\infty}{xt^{x-1}e^{-t}dt} = \\
 	  & = & x\int_0^{\infty}{t^{x-1}e^{-t}dt} = x\Gamma(x)
 	\end{eqnarray*}
-      \item Inducción sobre $n$, usando (a) y $\Gamma(1) = \int_0^{\infty}{e^{-t}dt} = 
+      \item Inducción sobre $n$, usando (i) y $\Gamma(1) = \int_0^{\infty}{e^{-t}dt} = 
 	\bigg[-e^{-t}\bigg]_0^{\infty} = 1 $
       \item Dados $p,q \in \mathbb{N} : \frac{1}{p} + \frac{1}{q} = 1$\\
       
 	La \textit{desigualdad de Young} para $a,b \ge 0$ nos dice: 
-	  $$ab \le \frac{a^p}{p} + \frac{b^q}{q}$$\\
+	\begin{equation}
+	  ab \le \frac{a^p}{p} + \frac{b^q}{q}
+	  \label{young}
+	\end{equation}
 	La \textit{desigualdad de Holder} nos dice: 
-	  $$\bigg|\int_a^b {fg dt}\bigg| \le 
-	  \bigg(\int_a^b {|f|^p dt}\bigg)^{1/p} \bigg(\int_a^b {|g|^p dt}\bigg)^{1/q}$$
-	  
+	\begin{equation}
+	  \bigg|\int_a^b {fg dt}\bigg| \le 
+	  \bigg(\int_a^b {|f|^p dt}\bigg)^{1/p} \bigg(\int_a^b {|g|^p dt}\bigg)^{1/q}
+	  \label{holder}
+	\end{equation}
+	
+	Esta última desigualdad se demuestra usando \ref{young} de la forma:
+	\begin{eqnarray*}
+	  &\left|\int_a^b {\frac{f}{\bigg(\int_a^b {|f|^p dt}\bigg)^{1/p}} \frac{g}{\bigg(\int_a^b {|g|^p dt}\bigg)^{1/q}} dt}\right| = 	 
+	    \int_a^b {\frac{|f|}{\bigg(\int_a^b {|f|^p dt}\bigg)^{1/p}} \frac{|g|}{\bigg(\int_a^b {|g|^q dt}\bigg)^{1/q}} dt}\\
+	  & \int_a^b {\frac{|f|}{\bigg(\int_a^b {|f| dt}\bigg)} \frac{|g|}{\bigg(\int_a^b {|g| dt}\bigg)} dt} \le \frac{1}{p} +\frac{1}{q}= 1
+	\end{eqnarray*}
+
+	
 	Así:
 	
 	\begin{eqnarray*}
@@ -195,7 +209,7 @@
   
   Sea $f\ge 0$ sobre $]0,+\infty[$ verificando:
   
-  \begin{enumerate}[(a)]
+  \begin{enumerate}[i.]
    \item $f(x+1) = xf(x)$
    \item $f(1) = 1$
    \item $\log \circ f es convexa$
@@ -257,7 +271,7 @@
   \begin{definition}
    Se define la función Beta con $x,y>0$ por:
    \begin{equation}
-       B(x,y) = \int_0^1 {t^{x-1}(t-1)^{y-1}dt}
+       B(x,y) = \int_0^1 {t^{x-1}(1-t)^{y-1}dt}
        \label{beta}
    \end{equation}
   \end{definition}
@@ -272,7 +286,7 @@
     Fijado $y>0$ probaremos que $f(x) = \frac{\Gamma(x+y)\cdot B(x,y)}{\Gamma(y)}$ cumple las hipótesis del
     teorema \ref{caracterizacion}
     
-    \begin{enumerate}[a)]
+    \begin{enumerate}[i.]
      \item Se tiene:
       \begin{eqnarray}
        B(x+1,y) &=& \int_0^1{t^x (1-t)^{y-1}dt} =\\ 	\nonumber
