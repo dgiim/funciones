@@ -146,7 +146,7 @@
   \begin{theorem}
     Se verifica:
       \begin{enumerate}[i.]
-	\item $\Gamma(x+1) = \Gamma(x)$
+	\item $\Gamma(x+1) = x\Gamma(x)$
 	\item $\Gamma(n+1) = n!$ para cualquier $n\in \mathbb{N}$
 	\item $\log \circ \Gamma$ es convexa en $]0,+\infty[$
       \end{enumerate}
@@ -212,7 +212,7 @@
   \begin{enumerate}[i.]
    \item $f(x+1) = xf(x)$
    \item $f(1) = 1$
-   \item $\log \circ f es convexa$
+   \item $\log \circ f$ es convexa
   \end{enumerate}
   
    Entonces $f(x) = \Gamma(x)$
@@ -221,7 +221,7 @@
 
   \begin{proof}
    Veremos que $f(x)$ queda unívocamente determinada, ya que $\Gamma$ verifica las hipótesis del teorema.
-   Por a), basta hacerlo para $x\in]0,1[$. Llamamos $\varphi = log \circ f$:
+   Por i., basta hacerlo para $x\in]0,1[$. Llamamos $\varphi = log \circ f$:
    
    \begin{equation}
     \varphi (x+1) = \varphi(x) + log(x), \forall x\in]0,+\infty[
@@ -259,11 +259,10 @@
    $$0\le \varphi(x) - log \bigg[\frac{n!n^x}{x(x+1)\ldots (x+n)}\bigg] \le xlog\bigg(1+\frac{1}{n}\bigg)$$
    
    Además, tenemos que $\lim_{n\rightarrow \infty} log\bigg(1+\frac{1}{n}\bigg)$ para $x$ fijo, lo que nos lleva a:\\
-   
-   $$\varphi(x) = \Gamma(x) \lim_{n\rightarrow \infty} \bigg[\frac{n!n^x}{x(x+1)\ldots (x+n)}\bigg] $$
+   $$\varphi(x) = \Gamma(x) = \lim_{n\rightarrow \infty} \bigg[\frac{n!n^x}{x(x+1)\ldots (x+n)}\bigg] $$
    
    y la existencia de dicho límite está asegurada porque $\varphi$ está definida en $]0,1[$, deduciéndose
-   de a) que la igualdad es cierta para todo $x\in]0,+\infty[$
+   de i. que la igualdad es cierta para todo $x\in]0,+\infty[$
   \end{proof}
 
   \section{Función Beta}
@@ -324,11 +323,11 @@
   \begin{equation}
    \Gamma(x) = 2\int_0^\infty s^{2x-1}e^{-s^2}ds \qquad x>0
   \end{equation}
-  y haciendo $x=\frac{1}{2}$ se obtiene $\int_{\infty}^{\infty} e^{-s^2}ds = \sqrt{\pi}$\\
+  y haciendo $x=\frac{1}{2}$ se obtiene $\int_{-\infty}^{\infty} e^{-s^2}ds = \sqrt{\pi}$\\
   
   Finalmente, es fácilmente deducible del Teorema \ref{caracterizacion} que:
   \begin{equation}
-   \Gamma(x)= \frac{2^{x-1}}{\sqrt{\pi}}\Gamma\bigg(\frac{x}{2}\bigg)\bigg(\frac{x+1}{2}\bigg)
+   \Gamma(x)= \frac{2^{x-1}}{\sqrt{\pi}}\Gamma\bigg(\frac{x}{2}\bigg)\Gamma\bigg(\frac{x+1}{2}\bigg)
   \end{equation}
 
 
